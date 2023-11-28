@@ -534,7 +534,7 @@ namespace ImGui
             ////////////////////////////////////////////////////////////////////////////////
 
             {
-                ImGuiNodesNodeDesc desc{"Test", ImGuiNodesNodeType_Generic, ImColor(0.2, 0.3, 0.6, 0.0f)};
+                ImGuiNodesNodeDesc desc{"Test", ImGuiNodesNodeType_Generic, ImColor(0.2f, 0.3f, 0.6f, 0.0f)};
                 nodes_desc_.push_back(desc);
 
                 desc.inputs_.push_back({"Float", ImGuiNodesConnectorType_Float});
@@ -549,7 +549,7 @@ namespace ImGui
             }
 
             {
-                ImGuiNodesNodeDesc desc{"InputBox", ImGuiNodesNodeType_Generic, ImColor(0.3, 0.5, 0.5, 0.0f)};
+                ImGuiNodesNodeDesc desc{"InputBox", ImGuiNodesNodeType_Generic, ImColor(0.3f, 0.5f, 0.5f, 0.0f)};
                 nodes_desc_.push_back(desc);
 
                 desc.inputs_.push_back({"Float1", ImGuiNodesConnectorType_Float});
@@ -575,7 +575,7 @@ namespace ImGui
             }
 
             {
-                ImGuiNodesNodeDesc desc{"OutputBox", ImGuiNodesNodeType_Generic, ImColor(0.4, 0.3, 0.5, 0.0f)};
+                ImGuiNodesNodeDesc desc{"OutputBox", ImGuiNodesNodeType_Generic, ImColor(0.4f, 0.3f, 0.5f, 0.0f)};
                 nodes_desc_.push_back(desc);
 
                 desc.inputs_.push_back({"GenericSink1", ImGuiNodesConnectorType_Generic});
