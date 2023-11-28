@@ -32,7 +32,7 @@ namespace ImGui
 
         if (false == ImGui::IsMouseDown(0) && canvas.Contains(mouse_))
         {
-            if (ImGui::IsMouseDragging(1))
+            if (ImGui::IsMouseDragging(2))
                 scroll_ += io.MouseDelta;
 
             if (io.KeyShift && !io.KeyCtrl)
