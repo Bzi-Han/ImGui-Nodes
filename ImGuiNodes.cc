@@ -868,12 +868,19 @@ namespace ImGui
 
         ////////////////////////////////////////////////////////////////////////////////
 
-        ImGui::SetCursorPos({0.f, ImGui::GetStyle().FramePadding.y * 2});
-        ImGui::NewLine();
+        const char *text, *text_end;
 
-        ImGui::Text("Mouse: %.2f, %.2f", mouse_.x, mouse_.y);
-        ImGui::Text("Scroll: %.2f, %.2f", scroll_.x, scroll_.y);
-        ImGui::Text("Scale: %.2f", scale_);
+        canvasMin += ImVec2{20.f, 16.f};
+        ImFormatStringToTempBuffer(&text, &text_end, "Mouse: %.2f, %.2f", mouse_.x, mouse_.y);
+        draw_list->AddText(canvasMin, ImColor(1.0f, 1.0f, 1.0f, 1.0f), text, text_end);
+
+        canvasMin.y += ImGui::GetFontSize() + 8.f;
+        ImFormatStringToTempBuffer(&text, &text_end, "Scroll: %.2f, %.2f", scroll_.x, scroll_.y);
+        draw_list->AddText(canvasMin, ImColor(1.0f, 1.0f, 1.0f, 1.0f), text, text_end);
+
+        canvasMin.y += ImGui::GetFontSize() + 8.f;
+        ImFormatStringToTempBuffer(&text, &text_end, "Scale: %.2f", scale_);
+        draw_list->AddText(canvasMin, ImColor(1.0f, 1.0f, 1.0f, 1.0f), text, text_end);
 
         ////////////////////////////////////////////////////////////////////////////////
     }
