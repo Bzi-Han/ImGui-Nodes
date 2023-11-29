@@ -524,7 +524,7 @@ namespace ImGui
         void ProcessNodes();
         void ProcessContextMenu();
 
-        ImGuiNodes()
+        ImGuiNodes(bool add_default_node_desc = false)
         {
             scale_ = 1.0f;
             state_ = ImGuiNodesState_Default;
@@ -534,72 +534,81 @@ namespace ImGui
 
             ////////////////////////////////////////////////////////////////////////////////
 
+            if (add_default_node_desc)
             {
-                ImGuiNodesNodeDesc desc{"Test", ImGuiNodesNodeType_Generic, ImColor(0.2f, 0.3f, 0.6f, 0.0f)};
-                nodes_desc_.push_back(desc);
+                {
+                    nodes_desc_.push_back(
+                        {
+                            .name_ = "Test",
+                            .type_ = ImGuiNodesNodeType_Generic,
+                            .color_ = ImColor(0.2f, 0.3f, 0.6f, 0.0f),
+                            .inputs_ = {
+                                {"Float", ImGuiNodesConnectorType_Float},
+                                {"Int", ImGuiNodesConnectorType_Int},
+                                {"TextStream", ImGuiNodesConnectorType_Text},
+                            },
+                            .outputs_ = {
+                                {"Float", ImGuiNodesConnectorType_Float},
+                            },
+                        });
+                }
 
-                desc.inputs_.push_back({"Float", ImGuiNodesConnectorType_Float});
-                desc.inputs_.push_back({"Int", ImGuiNodesConnectorType_Int});
-                desc.inputs_.push_back({"TextStream", ImGuiNodesConnectorType_Text});
+                {
+                    nodes_desc_.push_back(
+                        {
+                            .name_ = "InputBox",
+                            .type_ = ImGuiNodesNodeType_Generic,
+                            .color_ = ImColor(0.3f, 0.5f, 0.5f, 0.0f),
+                            .inputs_ = {
+                                {"Float1", ImGuiNodesConnectorType_Float},
+                                {"Float2", ImGuiNodesConnectorType_Float},
+                                {"Int1", ImGuiNodesConnectorType_Int},
+                                {"Int2", ImGuiNodesConnectorType_Int},
+                                {"", ImGuiNodesConnectorType_None},
+                                {"GenericSink", ImGuiNodesConnectorType_Generic},
+                                {"", ImGuiNodesConnectorType_None},
+                                {"Vector", ImGuiNodesConnectorType_Vector},
+                                {"Image", ImGuiNodesConnectorType_Image},
+                                {"Text", ImGuiNodesConnectorType_Text},
+                            },
+                            .outputs_ = {
+                                {"TextStream", ImGuiNodesConnectorType_Text},
+                                {"", ImGuiNodesConnectorType_None},
+                                {"Float", ImGuiNodesConnectorType_Float},
+                                {"", ImGuiNodesConnectorType_None},
+                                {"Int", ImGuiNodesConnectorType_Int},
+                            },
+                        });
+                }
 
-                desc.outputs_.push_back({"Float", ImGuiNodesConnectorType_Float});
-
-                auto &back = nodes_desc_.back();
-                back.inputs_ = desc.inputs_;
-                back.outputs_ = desc.outputs_;
-            }
-
-            {
-                ImGuiNodesNodeDesc desc{"InputBox", ImGuiNodesNodeType_Generic, ImColor(0.3f, 0.5f, 0.5f, 0.0f)};
-                nodes_desc_.push_back(desc);
-
-                desc.inputs_.push_back({"Float1", ImGuiNodesConnectorType_Float});
-                desc.inputs_.push_back({"Float2", ImGuiNodesConnectorType_Float});
-                desc.inputs_.push_back({"Int1", ImGuiNodesConnectorType_Int});
-                desc.inputs_.push_back({"Int2", ImGuiNodesConnectorType_Int});
-                desc.inputs_.push_back({"", ImGuiNodesConnectorType_None});
-                desc.inputs_.push_back({"GenericSink", ImGuiNodesConnectorType_Generic});
-                desc.inputs_.push_back({"", ImGuiNodesConnectorType_None});
-                desc.inputs_.push_back({"Vector", ImGuiNodesConnectorType_Vector});
-                desc.inputs_.push_back({"Image", ImGuiNodesConnectorType_Image});
-                desc.inputs_.push_back({"Text", ImGuiNodesConnectorType_Text});
-
-                desc.outputs_.push_back({"TextStream", ImGuiNodesConnectorType_Text});
-                desc.outputs_.push_back({"", ImGuiNodesConnectorType_None});
-                desc.outputs_.push_back({"Float", ImGuiNodesConnectorType_Float});
-                desc.outputs_.push_back({"", ImGuiNodesConnectorType_None});
-                desc.outputs_.push_back({"Int", ImGuiNodesConnectorType_Int});
-
-                auto &back = nodes_desc_.back();
-                back.inputs_.swap(desc.inputs_);
-                back.outputs_.swap(desc.outputs_);
-            }
-
-            {
-                ImGuiNodesNodeDesc desc{"OutputBox", ImGuiNodesNodeType_Generic, ImColor(0.4f, 0.3f, 0.5f, 0.0f)};
-                nodes_desc_.push_back(desc);
-
-                desc.inputs_.push_back({"GenericSink1", ImGuiNodesConnectorType_Generic});
-                desc.inputs_.push_back({"GenericSink2", ImGuiNodesConnectorType_Generic});
-                desc.inputs_.push_back({"", ImGuiNodesConnectorType_None});
-                desc.inputs_.push_back({"Float", ImGuiNodesConnectorType_Float});
-                desc.inputs_.push_back({"Int", ImGuiNodesConnectorType_Int});
-                desc.inputs_.push_back({"Text", ImGuiNodesConnectorType_Text});
-
-                desc.outputs_.push_back({"Vector", ImGuiNodesConnectorType_Vector});
-                desc.outputs_.push_back({"Image", ImGuiNodesConnectorType_Image});
-                desc.outputs_.push_back({"Text", ImGuiNodesConnectorType_Text});
-                desc.outputs_.push_back({"", ImGuiNodesConnectorType_None});
-                desc.outputs_.push_back({"Float", ImGuiNodesConnectorType_Float});
-                desc.outputs_.push_back({"Int", ImGuiNodesConnectorType_Int});
-                desc.outputs_.push_back({"", ImGuiNodesConnectorType_None});
-                desc.outputs_.push_back({"", ImGuiNodesConnectorType_None});
-                desc.outputs_.push_back({"", ImGuiNodesConnectorType_None});
-                desc.outputs_.push_back({"Generic", ImGuiNodesConnectorType_Generic});
-
-                auto &back = nodes_desc_.back();
-                back.inputs_.swap(desc.inputs_);
-                back.outputs_.swap(desc.outputs_);
+                {
+                    nodes_desc_.push_back(
+                        {
+                            .name_ = "OutputBox",
+                            .type_ = ImGuiNodesNodeType_Generic,
+                            .color_ = ImColor(0.4f, 0.3f, 0.5f, 0.0f),
+                            .inputs_ = {
+                                {"GenericSink1", ImGuiNodesConnectorType_Generic},
+                                {"GenericSink2", ImGuiNodesConnectorType_Generic},
+                                {"", ImGuiNodesConnectorType_None},
+                                {"Float", ImGuiNodesConnectorType_Float},
+                                {"Int", ImGuiNodesConnectorType_Int},
+                                {"Text", ImGuiNodesConnectorType_Text},
+                            },
+                            .outputs_ = {
+                                {"Vector", ImGuiNodesConnectorType_Vector},
+                                {"Image", ImGuiNodesConnectorType_Image},
+                                {"Text", ImGuiNodesConnectorType_Text},
+                                {"", ImGuiNodesConnectorType_None},
+                                {"Float", ImGuiNodesConnectorType_Float},
+                                {"Int", ImGuiNodesConnectorType_Int},
+                                {"", ImGuiNodesConnectorType_None},
+                                {"", ImGuiNodesConnectorType_None},
+                                {"", ImGuiNodesConnectorType_None},
+                                {"Generic", ImGuiNodesConnectorType_Generic},
+                            },
+                        });
+                }
             }
 
             ////////////////////////////////////////////////////////////////////////////////
