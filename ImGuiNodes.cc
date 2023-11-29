@@ -99,6 +99,8 @@ namespace ImGui
             ImColor color = mark_y % 5 ? ImColor(0.5f, 0.5f, 0.5f, 0.1f) : ImColor(1.0f, 1.0f, 1.0f, 0.1f);
             draw_list->AddLine(ImVec2(0.0f, y) + pos_, ImVec2(size_.x, y) + pos_, color, 0.1f);
         }
+
+        draw_list->AddRect(ImGui::GetWindowContentRegionMin(), ImGui::GetWindowContentRegionMax(), ImColor(0.247f, 0.247f, 0.282f, 1.000f));
     }
 
     ImGuiNodesNode *ImGuiNodes::UpdateNodesFromCanvas()
