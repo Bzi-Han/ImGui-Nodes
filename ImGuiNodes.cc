@@ -904,4 +904,36 @@ namespace ImGui
 
         ImGui::PopStyleVar();
     }
+
+    void ImGuiNodes::AddNodeDesc(ImGuiNodesNodeDesc &&desc)
+    {
+        nodes_desc_.insert(desc);
+    }
+
+    ImGuiNodesNode *ImGuiNodes::AddNode(const std::string_view &desc_name, ImVec2 pos)
+    {
+        if (desc_name.length() >= ImGuiNodesNamesMaxLen)
+            return nullptr;
+
+        ImGui::ImGuiNodesNodeDesc search_desc;
+        strcpy_s(search_desc.name_, desc_name.data());
+
+        auto it = nodes_desc_.find(search_desc);
+        if (it == nodes_desc_.end())
+            return nullptr;
+
+        ImGuiNodesNode *node = CreateNodeFromDesc(const_cast<ImGuiNodesNodeDesc *>(&*it), pos);
+        nodes_.push_back(node);
+        return node;
+    }
+
+    void ImGuiNodes::RemoveNode(ImGuiNodesNode *node)
+    {
+        nodes_.erase(std::remove(nodes_.begin(), nodes_.end(), node), nodes_.end());
+    }
+
+    void ImGuiNodes::Clear()
+    {
+        nodes_.clear();
+    }
 }

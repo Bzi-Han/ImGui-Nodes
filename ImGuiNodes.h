@@ -542,6 +542,13 @@ namespace ImGui
         void ProcessNodes();
         void ProcessContextMenu();
 
+        void AddNodeDesc(ImGuiNodesNodeDesc &&desc);
+
+        ImGuiNodesNode *AddNode(const std::string_view &desc_name, ImVec2 pos = {});
+        void RemoveNode(ImGuiNodesNode *node);
+        
+        void Clear();
+
         ImGuiNodes(bool add_default_node_desc = false)
         {
             scale_ = 1.0f;
