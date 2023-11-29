@@ -6,6 +6,8 @@
 #include <imgui/imgui.h>
 #include <imgui/imgui_internal.h>
 
+#include <vector>
+
 namespace ImGui
 {
     ////////////////////////////////////////////////////////////////////////////////
@@ -249,8 +251,8 @@ namespace ImGui
         ImGuiNodesNodeType type_;
         const char *name_;
         ImColor color_;
-        ImVector<ImGuiNodesInput> inputs_;
-        ImVector<ImGuiNodesOutput> outputs_;
+        std::vector<ImGuiNodesInput> inputs_;
+        std::vector<ImGuiNodesOutput> outputs_;
 
         inline void TranslateNode(ImVec2 delta, bool selected_only = false)
         {
@@ -440,14 +442,13 @@ namespace ImGui
         ImGuiNodesConnectorType type_;
     };
 
-    // TODO: ImVector me
     struct ImGuiNodesNodeDesc
     {
         char name_[ImGuiNodesNamesMaxLen];
         ImGuiNodesNodeType type_;
         ImColor color_;
-        ImVector<ImGuiNodesConnectionDesc> inputs_;
-        ImVector<ImGuiNodesConnectionDesc> outputs_;
+        std::vector<ImGuiNodesConnectionDesc> inputs_;
+        std::vector<ImGuiNodesConnectionDesc> outputs_;
     };
 
     ////////////////////////////////////////////////////////////////////////////////
@@ -474,8 +475,8 @@ namespace ImGui
 
         ////////////////////////////////////////////////////////////////////////////////
 
-        ImVector<ImGuiNodesNode *> nodes_;
-        ImVector<ImGuiNodesNodeDesc> nodes_desc_;
+        std::vector<ImGuiNodesNode *> nodes_;
+        std::vector<ImGuiNodesNodeDesc> nodes_desc_;
 
         ////////////////////////////////////////////////////////////////////////////////
 
@@ -608,14 +609,6 @@ namespace ImGui
 
         ~ImGuiNodes()
         {
-            for (int desc_idx = 0; desc_idx < nodes_desc_.size(); ++desc_idx)
-            {
-                ImGuiNodesNodeDesc &node = nodes_desc_[desc_idx];
-
-                node.inputs_.~ImVector();
-                node.outputs_.~ImVector();
-            }
-
             for (int node_idx = 0; node_idx < nodes_.size(); ++node_idx)
                 delete nodes_[node_idx];
         }

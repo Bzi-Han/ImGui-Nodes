@@ -114,7 +114,7 @@ namespace ImGui
         ImRect canvas(pos_, pos_ + size_);
         ImGuiNodesNode *hovered_node = NULL;
 
-        for (int node_idx = nodes_.size(); node_idx != 0;)
+        for (size_t node_idx = nodes_.size(); node_idx != 0;)
         {
             ImGuiNodesNode *node = nodes_[--node_idx];
             IM_ASSERT(node);
@@ -323,16 +323,14 @@ namespace ImGui
     {
         bool selected = false;
 
-        ImVector<ImGuiNodesNode *> nodes_unselected;
+        std::vector<ImGuiNodesNode *> nodes_unselected;
         nodes_unselected.reserve(nodes_.size());
 
-        ImVector<ImGuiNodesNode *> nodes_selected;
+        std::vector<ImGuiNodesNode *> nodes_selected;
         nodes_selected.reserve(nodes_.size());
 
-        for (ImGuiNodesNode **iterator = nodes_.begin(); iterator != nodes_.end(); ++iterator)
+        for (ImGuiNodesNode *node : nodes_)
         {
-            ImGuiNodesNode *node = ((ImGuiNodesNode *)*iterator);
-
             if (node->state_ & ImGuiNodesNodeStateFlag_Marked || node->state_ & ImGuiNodesNodeStateFlag_Selected)
             {
                 selected = true;
@@ -559,7 +557,7 @@ namespace ImGui
 
                     if (nodes_.back() != element_node_)
                     {
-                        ImGuiNodesNode **iterator = nodes_.find(element_node_);
+                        auto iterator = std::find(nodes_.begin(), nodes_.end(), element_node_);
                         nodes_.erase(iterator);
                         nodes_.push_back(element_node_);
                     }
@@ -715,7 +713,7 @@ namespace ImGui
 
         if (ImGui::IsKeyPressed(ImGuiKey_Delete))
         {
-            ImVector<ImGuiNodesNode *> nodes;
+            std::vector<ImGuiNodesNode *> nodes;
             nodes.reserve(nodes_.size());
 
             for (int node_idx = 0; node_idx < nodes_.size(); ++node_idx)
