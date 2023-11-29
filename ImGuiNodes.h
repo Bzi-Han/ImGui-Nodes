@@ -7,6 +7,8 @@
 #include <imgui/imgui_internal.h>
 
 #include <vector>
+#include <unordered_set>
+#include <string_view>
 
 namespace ImGui
 {
@@ -449,6 +451,22 @@ namespace ImGui
         ImColor color_;
         std::vector<ImGuiNodesConnectionDesc> inputs_;
         std::vector<ImGuiNodesConnectionDesc> outputs_;
+
+        struct Hash
+        {
+            std::size_t operator()(const ImGuiNodesNodeDesc &node) const
+            {
+                return std::hash<std::string_view>{}(node.name_);
+            }
+        };
+
+        struct Equal
+        {
+            bool operator()(const ImGuiNodesNodeDesc &lhs, const ImGuiNodesNodeDesc &rhs) const
+            {
+                return std::string_view{lhs.name_} == std::string_view{rhs.name_};
+            }
+        };
     };
 
     ////////////////////////////////////////////////////////////////////////////////
@@ -476,7 +494,7 @@ namespace ImGui
         ////////////////////////////////////////////////////////////////////////////////
 
         std::vector<ImGuiNodesNode *> nodes_;
-        std::vector<ImGuiNodesNodeDesc> nodes_desc_;
+        std::unordered_set<ImGuiNodesNodeDesc, ImGuiNodesNodeDesc::Hash, ImGuiNodesNodeDesc::Equal> nodes_desc_;
 
         ////////////////////////////////////////////////////////////////////////////////
 
@@ -537,7 +555,7 @@ namespace ImGui
             if (add_default_node_desc)
             {
                 {
-                    nodes_desc_.push_back(
+                    nodes_desc_.insert(
                         {
                             .name_ = "Test",
                             .type_ = ImGuiNodesNodeType_Generic,
@@ -554,7 +572,7 @@ namespace ImGui
                 }
 
                 {
-                    nodes_desc_.push_back(
+                    nodes_desc_.insert(
                         {
                             .name_ = "InputBox",
                             .type_ = ImGuiNodesNodeType_Generic,
@@ -582,7 +600,7 @@ namespace ImGui
                 }
 
                 {
-                    nodes_desc_.push_back(
+                    nodes_desc_.insert(
                         {
                             .name_ = "OutputBox",
                             .type_ = ImGuiNodesNodeType_Generic,

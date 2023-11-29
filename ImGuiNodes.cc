@@ -889,13 +889,15 @@ namespace ImGui
 
         if (ImGui::BeginPopup("NodesContextMenu"))
         {
-            for (int node_idx = 0; node_idx < nodes_desc_.size(); ++node_idx)
-                if (ImGui::MenuItem(nodes_desc_[node_idx].name_))
+            for (const auto &node_desc : nodes_desc_)
+            {
+                if (ImGui::MenuItem(node_desc.name_))
                 {
                     ImVec2 position = (mouse_ - scroll_ - pos_) / scale_;
-                    ImGuiNodesNode *node = CreateNodeFromDesc(&nodes_desc_[node_idx], position);
+                    ImGuiNodesNode *node = CreateNodeFromDesc(const_cast<ImGuiNodesNodeDesc *>(&node_desc), position);
                     nodes_.push_back(node);
                 }
+            }
 
             ImGui::EndPopup();
         }
