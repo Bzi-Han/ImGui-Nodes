@@ -854,6 +854,9 @@ namespace ImGui
 
         ////////////////////////////////////////////////////////////////////////////////
 
+        ImGui::SetCursorPos({0.f, ImGui::GetStyle().FramePadding.y * 2});
+        ImGui::NewLine();
+
         ImGui::Text("Mouse: %.2f, %.2f", mouse_.x, mouse_.y);
         ImGui::Text("Scroll: %.2f, %.2f", scroll_.x, scroll_.y);
         ImGui::Text("Scale: %.2f", scale_);
