@@ -71,7 +71,7 @@ namespace ImGui
                         }
                     }
 
-                    if (false == selected)
+                    if (false == selected && !nodes_desc_.empty())
                         ImGui::OpenPopup("NodesContextMenu");
                 }
         }
