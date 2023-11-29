@@ -83,6 +83,9 @@ namespace ImGui
         int mark_x = (int)(scroll_.x / grid);
         for (float x = (std::fmodf)(scroll_.x, grid); x < size_.x; x += grid, --mark_x)
         {
+            if (0.f > x)
+                continue;
+
             ImColor color = mark_x % 5 ? ImColor(0.5f, 0.5f, 0.5f, 0.1f) : ImColor(1.0f, 1.0f, 1.0f, 0.1f);
             draw_list->AddLine(ImVec2(x, 0.0f) + pos_, ImVec2(x, size_.y) + pos_, color, 0.1f);
         }
@@ -90,6 +93,9 @@ namespace ImGui
         int mark_y = (int)(scroll_.y / grid);
         for (float y = (std::fmodf)(scroll_.y, grid); y < size_.y; y += grid, --mark_y)
         {
+            if (0.f > y)
+                continue;
+
             ImColor color = mark_y % 5 ? ImColor(0.5f, 0.5f, 0.5f, 0.1f) : ImColor(1.0f, 1.0f, 1.0f, 0.1f);
             draw_list->AddLine(ImVec2(0.0f, y) + pos_, ImVec2(size_.x, y) + pos_, color, 0.1f);
         }
