@@ -554,79 +554,73 @@ namespace ImGui
 
             if (add_default_node_desc)
             {
-                {
-                    nodes_desc_.insert(
-                        {
-                            .name_ = "Test",
-                            .type_ = ImGuiNodesNodeType_Generic,
-                            .color_ = ImColor(0.2f, 0.3f, 0.6f, 0.0f),
-                            .inputs_ = {
-                                {"Float", ImGuiNodesConnectorType_Float},
-                                {"Int", ImGuiNodesConnectorType_Int},
-                                {"TextStream", ImGuiNodesConnectorType_Text},
-                            },
-                            .outputs_ = {
-                                {"Float", ImGuiNodesConnectorType_Float},
-                            },
-                        });
-                }
+                nodes_desc_.insert(
+                    {
+                        .name_ = "Test",
+                        .type_ = ImGuiNodesNodeType_Generic,
+                        .color_ = ImColor(0.2f, 0.3f, 0.6f, 0.0f),
+                        .inputs_ = {
+                            {"Float", ImGuiNodesConnectorType_Float},
+                            {"Int", ImGuiNodesConnectorType_Int},
+                            {"TextStream", ImGuiNodesConnectorType_Text},
+                        },
+                        .outputs_ = {
+                            {"Float", ImGuiNodesConnectorType_Float},
+                        },
+                    });
 
-                {
-                    nodes_desc_.insert(
-                        {
-                            .name_ = "InputBox",
-                            .type_ = ImGuiNodesNodeType_Generic,
-                            .color_ = ImColor(0.3f, 0.5f, 0.5f, 0.0f),
-                            .inputs_ = {
-                                {"Float1", ImGuiNodesConnectorType_Float},
-                                {"Float2", ImGuiNodesConnectorType_Float},
-                                {"Int1", ImGuiNodesConnectorType_Int},
-                                {"Int2", ImGuiNodesConnectorType_Int},
-                                {"", ImGuiNodesConnectorType_None},
-                                {"GenericSink", ImGuiNodesConnectorType_Generic},
-                                {"", ImGuiNodesConnectorType_None},
-                                {"Vector", ImGuiNodesConnectorType_Vector},
-                                {"Image", ImGuiNodesConnectorType_Image},
-                                {"Text", ImGuiNodesConnectorType_Text},
-                            },
-                            .outputs_ = {
-                                {"TextStream", ImGuiNodesConnectorType_Text},
-                                {"", ImGuiNodesConnectorType_None},
-                                {"Float", ImGuiNodesConnectorType_Float},
-                                {"", ImGuiNodesConnectorType_None},
-                                {"Int", ImGuiNodesConnectorType_Int},
-                            },
-                        });
-                }
+                nodes_desc_.insert(
+                    {
+                        .name_ = "InputBox",
+                        .type_ = ImGuiNodesNodeType_Generic,
+                        .color_ = ImColor(0.3f, 0.5f, 0.5f, 0.0f),
+                        .inputs_ = {
+                            {"Float1", ImGuiNodesConnectorType_Float},
+                            {"Float2", ImGuiNodesConnectorType_Float},
+                            {"Int1", ImGuiNodesConnectorType_Int},
+                            {"Int2", ImGuiNodesConnectorType_Int},
+                            {"", ImGuiNodesConnectorType_None},
+                            {"GenericSink", ImGuiNodesConnectorType_Generic},
+                            {"", ImGuiNodesConnectorType_None},
+                            {"Vector", ImGuiNodesConnectorType_Vector},
+                            {"Image", ImGuiNodesConnectorType_Image},
+                            {"Text", ImGuiNodesConnectorType_Text},
+                        },
+                        .outputs_ = {
+                            {"TextStream", ImGuiNodesConnectorType_Text},
+                            {"", ImGuiNodesConnectorType_None},
+                            {"Float", ImGuiNodesConnectorType_Float},
+                            {"", ImGuiNodesConnectorType_None},
+                            {"Int", ImGuiNodesConnectorType_Int},
+                        },
+                    });
 
-                {
-                    nodes_desc_.insert(
-                        {
-                            .name_ = "OutputBox",
-                            .type_ = ImGuiNodesNodeType_Generic,
-                            .color_ = ImColor(0.4f, 0.3f, 0.5f, 0.0f),
-                            .inputs_ = {
-                                {"GenericSink1", ImGuiNodesConnectorType_Generic},
-                                {"GenericSink2", ImGuiNodesConnectorType_Generic},
-                                {"", ImGuiNodesConnectorType_None},
-                                {"Float", ImGuiNodesConnectorType_Float},
-                                {"Int", ImGuiNodesConnectorType_Int},
-                                {"Text", ImGuiNodesConnectorType_Text},
-                            },
-                            .outputs_ = {
-                                {"Vector", ImGuiNodesConnectorType_Vector},
-                                {"Image", ImGuiNodesConnectorType_Image},
-                                {"Text", ImGuiNodesConnectorType_Text},
-                                {"", ImGuiNodesConnectorType_None},
-                                {"Float", ImGuiNodesConnectorType_Float},
-                                {"Int", ImGuiNodesConnectorType_Int},
-                                {"", ImGuiNodesConnectorType_None},
-                                {"", ImGuiNodesConnectorType_None},
-                                {"", ImGuiNodesConnectorType_None},
-                                {"Generic", ImGuiNodesConnectorType_Generic},
-                            },
-                        });
-                }
+                nodes_desc_.insert(
+                    {
+                        .name_ = "OutputBox",
+                        .type_ = ImGuiNodesNodeType_Generic,
+                        .color_ = ImColor(0.4f, 0.3f, 0.5f, 0.0f),
+                        .inputs_ = {
+                            {"GenericSink1", ImGuiNodesConnectorType_Generic},
+                            {"GenericSink2", ImGuiNodesConnectorType_Generic},
+                            {"", ImGuiNodesConnectorType_None},
+                            {"Float", ImGuiNodesConnectorType_Float},
+                            {"Int", ImGuiNodesConnectorType_Int},
+                            {"Text", ImGuiNodesConnectorType_Text},
+                        },
+                        .outputs_ = {
+                            {"Vector", ImGuiNodesConnectorType_Vector},
+                            {"Image", ImGuiNodesConnectorType_Image},
+                            {"Text", ImGuiNodesConnectorType_Text},
+                            {"", ImGuiNodesConnectorType_None},
+                            {"Float", ImGuiNodesConnectorType_Float},
+                            {"Int", ImGuiNodesConnectorType_Int},
+                            {"", ImGuiNodesConnectorType_None},
+                            {"", ImGuiNodesConnectorType_None},
+                            {"", ImGuiNodesConnectorType_None},
+                            {"Generic", ImGuiNodesConnectorType_Generic},
+                        },
+                    });
             }
 
             ////////////////////////////////////////////////////////////////////////////////
