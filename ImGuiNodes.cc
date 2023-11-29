@@ -797,6 +797,10 @@ namespace ImGui
 
         ImGui::SetWindowFontScale(scale_);
 
+        ImVec2 canvasMin = ImGui::GetWindowContentRegionMin() + ImGui::GetWindowPos() + ImVec2{1.f, 1.f};
+        ImVec2 canvasMax = ImGui::GetWindowContentRegionMax() + ImGui::GetWindowPos() - ImVec2{1.f, 1.f};
+        ImGui::PushClipRect(canvasMin, canvasMax, false);
+
         for (int node_idx = 0; node_idx < nodes_.size(); ++node_idx)
         {
             const ImGuiNodesNode *node = nodes_[node_idx];
@@ -849,6 +853,8 @@ namespace ImGui
 
         if (connection_.x != connection_.z && connection_.y != connection_.w)
             DrawConnection(ImVec2(connection_.x, connection_.y), ImVec2(connection_.z, connection_.w), ImColor(0.0f, 1.0f, 0.0f, 1.0f));
+
+        ImGui::PopClipRect();
 
         ImGui::SetWindowFontScale(1.0f);
 
