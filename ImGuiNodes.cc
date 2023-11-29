@@ -30,9 +30,9 @@ namespace ImGui
 
         ////////////////////////////////////////////////////////////////////////////////
 
-        if (false == ImGui::IsMouseDown(0) && canvas.Contains(mouse_))
+        if (false == ImGui::IsMouseDown(ImGuiMouseButton_Left) && canvas.Contains(mouse_))
         {
-            if (ImGui::IsMouseDragging(2))
+            if (ImGui::IsMouseDragging(ImGuiMouseButton_Middle))
                 scroll_ += io.MouseDelta;
 
             if (io.KeyShift && !io.KeyCtrl)
@@ -57,8 +57,8 @@ namespace ImGui
                 scroll_ += mouse_ - shift - pos_;
             }
 
-            if (ImGui::IsMouseReleased(1) && element_node_ == NULL)
-                if (io.MouseDragMaxDistanceSqr[1] < (io.MouseDragThreshold * io.MouseDragThreshold))
+            if (ImGui::IsMouseReleased(ImGuiMouseButton_Right) && element_node_ == NULL)
+                if (io.MouseDragMaxDistanceSqr[ImGuiMouseButton_Right] < (io.MouseDragThreshold * io.MouseDragThreshold))
                 {
                     bool selected = false;
 
@@ -435,7 +435,7 @@ namespace ImGui
 
         ////////////////////////////////////////////////////////////////////////////////
 
-        if (ImGui::IsMouseDoubleClicked(0))
+        if (ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left))
         {
             switch (state_)
             {
@@ -505,7 +505,7 @@ namespace ImGui
 
         ////////////////////////////////////////////////////////////////////////////////
 
-        if (ImGui::IsMouseDoubleClicked(1))
+        if (ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Right))
         {
             switch (state_)
             {
@@ -525,7 +525,7 @@ namespace ImGui
 
         ////////////////////////////////////////////////////////////////////////////////
 
-        if (ImGui::IsMouseClicked(0))
+        if (ImGui::IsMouseClicked(ImGuiMouseButton_Left))
         {
             switch (state_)
             {
@@ -585,7 +585,7 @@ namespace ImGui
 
         ////////////////////////////////////////////////////////////////////////////////
 
-        if (ImGui::IsMouseDragging(0))
+        if (ImGui::IsMouseDragging(ImGuiMouseButton_Left))
         {
             switch (state_)
             {
@@ -653,7 +653,7 @@ namespace ImGui
 
         ////////////////////////////////////////////////////////////////////////////////
 
-        if (ImGui::IsMouseReleased(0))
+        if (ImGui::IsMouseReleased(ImGuiMouseButton_Left))
         {
             switch (state_)
             {
