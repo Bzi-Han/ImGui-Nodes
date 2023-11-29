@@ -881,6 +881,24 @@ namespace ImGui
         draw_list->AddText(canvasMin, ImColor(1.0f, 1.0f, 1.0f, 1.0f), text, text_end);
 
         ////////////////////////////////////////////////////////////////////////////////
+
+        if (nullptr != processing_node_)
+        {
+            canvasMin.y += ImGui::GetFontSize();
+
+            canvasMin.y += ImGui::GetFontSize() + 8.f;
+            if (ImGuiNodesNamesMaxLen > strlen(processing_node_->name_))
+                ImFormatStringToTempBuffer(&text, &text_end, "Node: %s", processing_node_->name_);
+            else
+                ImFormatStringToTempBuffer(&text, &text_end, "Node: %.27s...", processing_node_->name_);
+            draw_list->AddText(canvasMin, ImColor(1.0f, 1.0f, 1.0f, 1.0f), text, text_end);
+
+            canvasMin.y += ImGui::GetFontSize() + 8.f;
+            ImFormatStringToTempBuffer(&text, &text_end, "Position: %.2f %.2f", processing_node_->area_node_.Min.x, processing_node_->area_node_.Min.y);
+            draw_list->AddText(canvasMin, ImColor(1.0f, 1.0f, 1.0f, 1.0f), text, text_end);
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////
     }
 
     void ImGuiNodes::ProcessContextMenu()
@@ -929,6 +947,13 @@ namespace ImGui
 
     void ImGuiNodes::RemoveNode(ImGuiNodesNode *node)
     {
+        element_node_ = nullptr;
+        element_input_ = nullptr;
+        element_output_ = nullptr;
+
+        if (processing_node_ == node)
+            processing_node_ = nullptr;
+
         nodes_.erase(std::remove(nodes_.begin(), nodes_.end(), node), nodes_.end());
     }
 

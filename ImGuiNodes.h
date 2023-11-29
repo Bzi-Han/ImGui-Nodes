@@ -546,7 +546,7 @@ namespace ImGui
 
         ImGuiNodesNode *AddNode(const std::string_view &desc_name, ImVec2 pos = {});
         void RemoveNode(ImGuiNodesNode *node);
-        
+
         void Clear();
 
         ImGuiNodes(bool add_default_node_desc = false)
