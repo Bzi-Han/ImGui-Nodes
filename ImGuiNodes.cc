@@ -854,56 +854,9 @@ namespace ImGui
 
         ////////////////////////////////////////////////////////////////////////////////
 
-        ImGui::SetCursorPos(ImVec2(0.0f, 0.0f));
-        ImGui::NewLine();
-
-        switch (state_)
-        {
-        case ImGuiNodesState_Default:
-            ImGui::Text("ImGuiNodesState_Default");
-            break;
-        case ImGuiNodesState_HoveringNode:
-            ImGui::Text("ImGuiNodesState_HoveringNode");
-            break;
-        case ImGuiNodesState_HoveringInput:
-            ImGui::Text("ImGuiNodesState_HoveringInput");
-            break;
-        case ImGuiNodesState_HoveringOutput:
-            ImGui::Text("ImGuiNodesState_HoveringOutput");
-            break;
-        case ImGuiNodesState_Draging:
-            ImGui::Text("ImGuiNodesState_Draging");
-            break;
-        case ImGuiNodesState_DragingInput:
-            ImGui::Text("ImGuiNodesState_DragingInput");
-            break;
-        case ImGuiNodesState_DragingOutput:
-            ImGui::Text("ImGuiNodesState_DragingOutput");
-            break;
-        case ImGuiNodesState_Selecting:
-            ImGui::Text("ImGuiNodesState_Selecting");
-            break;
-        default:
-            ImGui::Text("UNKNOWN");
-            break;
-        }
-
-        ImGui::NewLine();
-
-        ImGui::Text("Position: %.2f, %.2f", pos_.x, pos_.y);
-        ImGui::Text("Size: %.2f, %.2f", size_.x, size_.y);
         ImGui::Text("Mouse: %.2f, %.2f", mouse_.x, mouse_.y);
         ImGui::Text("Scroll: %.2f, %.2f", scroll_.x, scroll_.y);
         ImGui::Text("Scale: %.2f", scale_);
-
-        ImGui::NewLine();
-
-        if (element_node_)
-            ImGui::Text("Element_node: %s", element_node_->name_);
-        if (element_input_)
-            ImGui::Text("Element_input: %s", element_input_->name_);
-        if (element_output_)
-            ImGui::Text("Element_output: %s", element_output_->name_);
 
         ////////////////////////////////////////////////////////////////////////////////
     }
