@@ -265,6 +265,8 @@ namespace ImGui
 
         void ToggleCollapse();
 
+        void MoveNode(ImVec2 pos, bool selected_only = false);
+
         inline void TranslateNode(ImVec2 delta, bool selected_only = false)
         {
             if (selected_only && !(state_ & ImGuiNodesNodeStateFlag_Selected))

@@ -1095,4 +1095,11 @@ namespace ImGui
             TranslateNode(ImVec2(0.0f, body_height_ * 0.5f));
         }
     }
+
+    void ImGuiNodesNode::MoveNode(ImVec2 pos, bool selected_only)
+    {
+        ImVec2 delta = pos - area_node_.Min;
+
+        TranslateNode(delta, selected_only);
+    }
 }
