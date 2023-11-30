@@ -558,6 +558,8 @@ namespace ImGui
 
         void Clear();
 
+        ImGuiNodesNode *GetProcessingNode() const { return processing_node_; }
+
         ImGuiNodes(bool add_default_node_desc = false)
         {
             scale_ = 1.0f;
