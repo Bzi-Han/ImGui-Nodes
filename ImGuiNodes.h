@@ -256,6 +256,8 @@ namespace ImGui
         std::vector<ImGuiNodesInput> inputs_;
         std::vector<ImGuiNodesOutput> outputs_;
 
+        void ToggleCollapse();
+
         inline void TranslateNode(ImVec2 delta, bool selected_only = false)
         {
             if (selected_only && !(state_ & ImGuiNodesNodeStateFlag_Selected))

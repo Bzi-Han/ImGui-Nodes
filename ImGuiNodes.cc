@@ -962,3 +962,23 @@ namespace ImGui
         nodes_.clear();
     }
 }
+
+namespace ImGui
+{
+    void ImGuiNodesNode::ToggleCollapse()
+    {
+        if (state_ & ImGuiNodesNodeStateFlag_Collapsed)
+        {
+            state_ &= ~ImGuiNodesNodeStateFlag_Collapsed;
+            area_node_.Max.y += body_height_;
+            TranslateNode(ImVec2(0.0f, body_height_ * -0.5f));
+        }
+        else
+        {
+            state_ |= ImGuiNodesNodeStateFlag_Collapsed;
+            area_node_.Max.y -= body_height_;
+
+            TranslateNode(ImVec2(0.0f, body_height_ * 0.5f));
+        }
+    }
+}
