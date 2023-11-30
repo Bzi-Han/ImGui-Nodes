@@ -310,6 +310,7 @@ namespace ImGui
         node->BuildNodeGeometry(inputs, outputs);
         node->TranslateNode(pos - node->area_node_.GetCenter());
         node->state_ |= ImGuiNodesNodeStateFlag_Visible | ImGuiNodesNodeStateFlag_Hovered | ImGuiNodesNodeStateFlag_Processing;
+        node->desc_ = desc;
 
         ////////////////////////////////////////////////////////////////////////////////
 
@@ -965,6 +966,40 @@ namespace ImGui
 
 namespace ImGui
 {
+    void ImGuiNodesNode::SetName(const char *name)
+    {
+        name_ = name;
+
+        area_name_.Min = ImVec2(0.0f, 0.0f);
+        area_name_.Max = ImGui::CalcTextSize(name);
+        title_height_ = ImGuiNodesTitleHight * area_name_.GetHeight();
+
+        ////////////////////////////////////////////////////////////////////////////////
+
+        ImVec2 inputs;
+        ImVec2 outputs;
+
+        for (int input_idx = 0; input_idx < desc_->inputs_.size(); ++input_idx)
+        {
+            ImGuiNodesInput input(desc_->inputs_[input_idx].name_, desc_->inputs_[input_idx].type_);
+
+            inputs.x = ImMax(inputs.x, input.area_input_.GetWidth());
+            inputs.y += input.area_input_.GetHeight();
+        }
+
+        for (int output_idx = 0; output_idx < desc_->outputs_.size(); ++output_idx)
+        {
+            ImGuiNodesOutput output(desc_->outputs_[output_idx].name_, desc_->outputs_[output_idx].type_);
+
+            outputs.x = ImMax(outputs.x, output.area_output_.GetWidth());
+            outputs.y += output.area_output_.GetHeight();
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////
+
+        BuildNodeGeometry(inputs, outputs);
+    }
+
     void ImGuiNodesNode::ToggleCollapse()
     {
         if (state_ & ImGuiNodesNodeStateFlag_Collapsed)

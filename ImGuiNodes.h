@@ -243,6 +243,8 @@ namespace ImGui
         }
     };
 
+    struct ImGuiNodesNodeDesc;
+
     struct ImGuiNodesNode
     {
         ImRect area_node_;
@@ -255,6 +257,11 @@ namespace ImGui
         ImColor color_;
         std::vector<ImGuiNodesInput> inputs_;
         std::vector<ImGuiNodesOutput> outputs_;
+
+        ImGuiNodesNodeDesc *desc_ = nullptr;
+        void *user_data_ = nullptr;
+
+        void SetName(const char *name);
 
         void ToggleCollapse();
 
