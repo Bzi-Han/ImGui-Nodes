@@ -962,6 +962,85 @@ namespace ImGui
     {
         nodes_.clear();
     }
+
+    bool ImGuiNodes::IsConnection(ImGuiNodesNode *output_node, size_t output_slot, ImGuiNodesNode *input_node, size_t input_slot)
+    {
+        if (output_node == nullptr || input_node == nullptr)
+            return false;
+
+        if (output_node->outputs_.size() <= output_slot)
+            return false;
+
+        if (input_node->inputs_.size() <= input_slot)
+            return false;
+
+        if (output_node->outputs_[output_slot].connections_ == 0)
+            return false;
+
+        if (input_node->inputs_[input_slot].output_ == nullptr || input_node->inputs_[input_slot].target_ == nullptr)
+            return false;
+
+        if (input_node->inputs_[input_slot].output_ != &output_node->outputs_[output_slot])
+            return false;
+
+        if (input_node->inputs_[input_slot].target_ != output_node)
+            return false;
+
+        return true;
+    }
+
+    bool ImGuiNodes::IsConnection(ImGuiNodesNode *output_node, ImGuiNodesNode *input_node)
+    {
+        return IsConnection(output_node, 0, input_node, 0);
+    }
+
+    void ImGuiNodes::AddConnection(ImGuiNodesNode *output_node, size_t output_slot, ImGuiNodesNode *input_node, size_t input_slot)
+    {
+        if (output_node == nullptr || input_node == nullptr)
+            return;
+
+        if (output_node->outputs_.size() <= output_slot)
+            return;
+
+        if (input_node->inputs_.size() <= input_slot)
+            return;
+
+        if (IsConnection(output_node, output_slot, input_node, input_slot))
+            return;
+
+        output_node->outputs_[output_slot].connections_++;
+        input_node->inputs_[input_slot].output_ = &output_node->outputs_[output_slot];
+        input_node->inputs_[input_slot].target_ = output_node;
+    }
+
+    void ImGuiNodes::AddConnection(ImGuiNodesNode *output_node, ImGuiNodesNode *input_node)
+    {
+        AddConnection(output_node, 0, input_node, 0);
+    }
+
+    void ImGuiNodes::RemoveConnection(ImGuiNodesNode *output_node, size_t output_slot, ImGuiNodesNode *input_node, size_t input_slot)
+    {
+        if (output_node == nullptr || input_node == nullptr)
+            return;
+
+        if (output_node->outputs_.size() <= output_slot)
+            return;
+
+        if (input_node->inputs_.size() <= input_slot)
+            return;
+
+        if (!IsConnection(output_node, output_slot, input_node, input_slot))
+            return;
+
+        output_node->outputs_[output_slot].connections_--;
+        input_node->inputs_[input_slot].output_ = nullptr;
+        input_node->inputs_[input_slot].target_ = nullptr;
+    }
+
+    void ImGuiNodes::RemoveConnection(ImGuiNodesNode *output_node, ImGuiNodesNode *input_node)
+    {
+        RemoveConnection(output_node, 0, input_node, 0);
+    }
 }
 
 namespace ImGui

@@ -560,6 +560,15 @@ namespace ImGui
 
         ImGuiNodesNode *GetProcessingNode() const { return processing_node_; }
 
+        bool IsConnection(ImGuiNodesNode *output_node, size_t output_slot, ImGuiNodesNode *input_node, size_t input_slot);
+        bool IsConnection(ImGuiNodesNode *output_node, ImGuiNodesNode *input_node);
+
+        void AddConnection(ImGuiNodesNode *output_node, size_t output_slot, ImGuiNodesNode *input_node, size_t input_slot);
+        void AddConnection(ImGuiNodesNode *output_node, ImGuiNodesNode *input_node);
+
+        void RemoveConnection(ImGuiNodesNode *output_node, size_t output_slot, ImGuiNodesNode *input_node, size_t input_slot);
+        void RemoveConnection(ImGuiNodesNode *output_node, ImGuiNodesNode *input_node);
+
         ImGuiNodes(bool add_default_node_desc = false)
         {
             scale_ = 1.0f;
