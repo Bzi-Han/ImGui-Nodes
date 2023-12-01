@@ -184,7 +184,7 @@ void Render()
     ImGui::SetNextWindowPos({}, ImGuiCond_Once);
     ImGui::SetNextWindowSize(ImVec2{static_cast<float>(WINDOW_WIDTH), static_cast<float>(WINDOW_HEIGHT)}, ImGuiCond_Once);
 
-    ImGui::Begin("Nodes", nullptr, ImGuiWindowFlags_NoMove);
+    ImGui::Begin("Nodes");
     nodes.Update();
     nodes.ProcessNodes();
     nodes.ProcessContextMenu();

@@ -24,6 +24,10 @@ namespace ImGui
 
         ////////////////////////////////////////////////////////////////////////////////
 
+        ImGui::InvisibleButton("CanvasGeometryMouseCapture", size_, ImGuiButtonFlags_MouseButtonLeft | ImGuiButtonFlags_MouseButtonRight);
+
+        ////////////////////////////////////////////////////////////////////////////////
+
         if (ImGui::IsKeyPressed(ImGuiKey_Home))
         {
             scroll_ = {};
@@ -102,7 +106,7 @@ namespace ImGui
             draw_list->AddLine(ImVec2(0.0f, y) + pos_, ImVec2(size_.x, y) + pos_, color, 0.1f);
         }
 
-        draw_list->AddRect(ImGui::GetWindowContentRegionMin(), ImGui::GetWindowContentRegionMax(), ImColor(0.247f, 0.247f, 0.282f, 1.000f));
+        draw_list->AddRect(canvas.Min, canvas.Max, ImColor(0.247f, 0.247f, 0.282f, 1.000f));
     }
 
     ImGuiNodesNode *ImGuiNodes::UpdateNodesFromCanvas()
