@@ -333,7 +333,7 @@ namespace ImGui
 
             const ImVec2 outline(4.0f * scale, 4.0f * scale);
 
-            const ImDrawFlags rounding_corners_flags = ImDrawCornerFlags_All;
+            const ImDrawFlags rounding_corners_flags = ImDrawFlags_RoundCornersAll;
 
             if (state_ & ImGuiNodesNodeStateFlag_Disabled)
             {
@@ -353,7 +353,7 @@ namespace ImGui
             if (false == (state_ & ImGuiNodesNodeStateFlag_Collapsed))
                 draw_list->AddLine(ImVec2(node_rect.Min.x, head.y), ImVec2(head.x - 1.0f, head.y), ImColor(0.0f, 0.0f, 0.0f, 0.5f), 2.0f);
 
-            const ImDrawFlags head_corners_flags = state_ & ImGuiNodesNodeStateFlag_Collapsed ? rounding_corners_flags : ImDrawCornerFlags_Top;
+            const ImDrawFlags head_corners_flags = state_ & ImGuiNodesNodeStateFlag_Collapsed ? rounding_corners_flags : ImDrawFlags_RoundCornersTop;
             draw_list->AddRectFilled(node_rect.Min, head, head_color, rounding, head_corners_flags);
 
             ////////////////////////////////////////////////////////////////////////////////
@@ -668,5 +668,9 @@ namespace ImGui
 }
 
 #undef IMGUI_DEFINE_MATH_OPERATORS
+
+#if defined(IMGUI_NODES_HEADER_ONLY)
+#include "ImGuiNodes.cc"
+#endif
 
 #endif // !IMGUI_NODES_H

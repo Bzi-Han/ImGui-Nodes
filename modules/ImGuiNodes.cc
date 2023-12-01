@@ -1,6 +1,8 @@
 #include "ImGuiNodes.h"
 
-#include <cmath>
+#include <math.h>
+
+#include <algorithm>
 
 namespace ImGui
 {
@@ -81,7 +83,7 @@ namespace ImGui
         const float grid = 64.0f * scale_;
 
         int mark_x = (int)(scroll_.x / grid);
-        for (float x = (std::fmodf)(scroll_.x, grid); x < size_.x; x += grid, --mark_x)
+        for (float x = fmodf(scroll_.x, grid); x < size_.x; x += grid, --mark_x)
         {
             if (0.f > x)
                 continue;
@@ -91,7 +93,7 @@ namespace ImGui
         }
 
         int mark_y = (int)(scroll_.y / grid);
-        for (float y = (std::fmodf)(scroll_.y, grid); y < size_.y; y += grid, --mark_y)
+        for (float y = fmodf(scroll_.y, grid); y < size_.y; y += grid, --mark_y)
         {
             if (0.f > y)
                 continue;
