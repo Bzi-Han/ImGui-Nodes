@@ -11,6 +11,11 @@ namespace ImGui
         const ImGuiIO &io = ImGui::GetIO();
 
         window_focused_ = ImGui::IsWindowFocused();
+        if (!window_focused_ && ImGui::IsWindowHovered() && ImGui::IsMouseDown(ImGuiMouseButton_Middle))
+        {
+            ImGui::SetWindowFocus();
+            window_focused_ = true;
+        }
 
         mouse_ = ImGui::GetMousePos();
 
