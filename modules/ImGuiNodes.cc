@@ -941,7 +941,11 @@ namespace ImGui
             return nullptr;
 
         ImGui::ImGuiNodesNodeDesc search_desc;
-        strcpy_s(search_desc.name_, desc_name.data());
+
+        constexpr size_t maxNameLength = IM_ARRAYSIZE(search_desc.name_) - 1;
+        size_t nameLength = (std::min)(maxNameLength, desc_name.size());
+        memcpy(search_desc.name_, desc_name.data(), nameLength);
+        search_desc.name_[nameLength] = '\0';
 
         auto it = nodes_desc_.find(search_desc);
         if (it == nodes_desc_.end())
