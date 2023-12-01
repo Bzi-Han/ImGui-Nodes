@@ -15,7 +15,7 @@ void ObjectRelationLayout::CalculateLevelGroups(ObjectInfoProxy *root, size_t de
     if (!root->childrens.empty())
     {
         if (m_levelGroupInfo.size() < depth + 2)
-            m_levelGroupInfo.emplace_back(depth + 1);
+            m_levelGroupInfo.push_back({depth + 1});
 
         m_levelGroupInfo[depth + 1].groupsCount++;
         m_levelGroupInfo[depth + 1].groupParents.push_back(root);
