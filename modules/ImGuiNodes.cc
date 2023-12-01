@@ -10,6 +10,8 @@ namespace ImGui
     {
         const ImGuiIO &io = ImGui::GetIO();
 
+        window_focused_ = ImGui::IsWindowFocused();
+
         mouse_ = ImGui::GetMousePos();
 
         {
@@ -28,7 +30,7 @@ namespace ImGui
 
         ////////////////////////////////////////////////////////////////////////////////
 
-        if (ImGui::IsKeyPressed(ImGuiKey_Home))
+        if (window_focused_ && ImGui::IsKeyPressed(ImGuiKey_Home))
         {
             scroll_ = {};
             scale_ = 1.0f;
@@ -36,7 +38,7 @@ namespace ImGui
 
         ////////////////////////////////////////////////////////////////////////////////
 
-        if (false == ImGui::IsMouseDown(ImGuiMouseButton_Left) && canvas.Contains(mouse_))
+        if (window_focused_ && (false == ImGui::IsMouseDown(ImGuiMouseButton_Left) && canvas.Contains(mouse_)))
         {
             if (ImGui::IsMouseDragging(ImGuiMouseButton_Middle))
                 scroll_ += io.MouseDelta;
@@ -448,7 +450,7 @@ namespace ImGui
 
         ////////////////////////////////////////////////////////////////////////////////
 
-        if (ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left))
+        if (window_focused_ && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left))
         {
             switch (state_)
             {
@@ -518,7 +520,7 @@ namespace ImGui
 
         ////////////////////////////////////////////////////////////////////////////////
 
-        if (ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Right))
+        if (window_focused_ && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Right))
         {
             switch (state_)
             {
@@ -538,7 +540,7 @@ namespace ImGui
 
         ////////////////////////////////////////////////////////////////////////////////
 
-        if (ImGui::IsMouseClicked(ImGuiMouseButton_Left))
+        if (window_focused_ && ImGui::IsMouseClicked(ImGuiMouseButton_Left))
         {
             switch (state_)
             {
@@ -598,7 +600,7 @@ namespace ImGui
 
         ////////////////////////////////////////////////////////////////////////////////
 
-        if (ImGui::IsMouseDragging(ImGuiMouseButton_Left))
+        if (window_focused_ && ImGui::IsMouseDragging(ImGuiMouseButton_Left))
         {
             switch (state_)
             {
@@ -666,7 +668,7 @@ namespace ImGui
 
         ////////////////////////////////////////////////////////////////////////////////
 
-        if (ImGui::IsMouseReleased(ImGuiMouseButton_Left))
+        if (window_focused_ && ImGui::IsMouseReleased(ImGuiMouseButton_Left))
         {
             switch (state_)
             {
@@ -718,7 +720,7 @@ namespace ImGui
 
         ////////////////////////////////////////////////////////////////////////////////
 
-        if (ImGui::IsKeyPressed(ImGuiKey_Delete))
+        if (window_focused_ && ImGui::IsKeyPressed(ImGuiKey_Delete))
         {
             std::vector<ImGuiNodesNode *> nodes;
             nodes.reserve(nodes_.size());

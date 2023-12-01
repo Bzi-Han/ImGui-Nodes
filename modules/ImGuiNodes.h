@@ -494,6 +494,7 @@ namespace ImGui
         ImVec2 scroll_;
         ImVec4 connection_;
         float scale_;
+        bool window_focused_;
 
         ////////////////////////////////////////////////////////////////////////////////
 
