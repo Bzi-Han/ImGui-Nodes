@@ -1,7 +1,10 @@
 #ifndef IMGUI_NODES_H // !IMGUI_NODES_H
 #define IMGUI_NODES_H
 
+#ifndef IMGUI_DEFINE_MATH_OPERATORS
+#define NO_PRE_DEFINE_MATH_OPERATORS
 #define IMGUI_DEFINE_MATH_OPERATORS
+#endif
 
 #include <imgui/imgui.h>
 #include <imgui/imgui_internal.h>
@@ -667,7 +670,10 @@ namespace ImGui
     ////////////////////////////////////////////////////////////////////////////////
 }
 
+#if defined(NO_PRE_DEFINE_MATH_OPERATORS)
+#undef NO_PRE_DEFINE_MATH_OPERATORS
 #undef IMGUI_DEFINE_MATH_OPERATORS
+#endif
 
 #if defined(IMGUI_NODES_HEADER_ONLY)
 #include "ImGuiNodes.cc"
