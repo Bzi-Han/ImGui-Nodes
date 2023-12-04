@@ -977,6 +977,10 @@ namespace ImGui
 
     void ImGuiNodes::Clear()
     {
+        element_node_ = nullptr;
+        element_input_ = nullptr;
+        element_output_ = nullptr;
+        processing_node_ = nullptr;
         nodes_.clear();
     }
 
